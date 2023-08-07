@@ -1,26 +1,18 @@
-import axios, { AxiosInstance } from 'axios';
-import 'dotenv/config';
+import { AxiosInstance } from 'axios';
 import { AuthData } from '../interfaces/interfaces';
-
-const axiosInstance: AxiosInstance = axios.create({
-	baseURL: process.env.BASE_URL,
-});
+import { instance } from '../instances/axios.instance';
 
 export class AuthService {
-	private axios: AxiosInstance;
-
-	constructor(axiosInstance: AxiosInstance) {
-		this.axios = axiosInstance;
-	}
+	constructor(private readonly axios: AxiosInstance) {}
 
 	async authenticate(data: AuthData) {
 		try {
-			const newData = await this.axios.post('/auth', data);
-			return newData.data;
+			const login = await this.axios.post('/auth', data);
+			return login.data;
 		} catch (error) {
 			throw error;
 		}
 	}
 }
 
-export const service = new AuthService(axiosInstance);
+export const authService = new AuthService(instance);

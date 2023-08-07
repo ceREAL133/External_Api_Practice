@@ -1,4 +1,4 @@
-import { object, string, ref, number } from 'yup';
+import { object, string } from 'yup';
 
 export const createUserSessionSchema = object({
 	body: object({
