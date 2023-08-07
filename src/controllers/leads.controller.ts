@@ -25,3 +25,15 @@ export const getLeads = async (req: Request, res: Response) => {
 		res.status(500).json({ error: 'An error occurred' });
 	}
 };
+
+export const getSingleLead = async (req: Request, res: Response) => {
+	try {
+		const { leadId } = req.params;
+
+		const response = await LeadsService.getSingleLead(leadId);
+
+		res.status(200).json(response);
+	} catch (error) {
+		res.status(500).json({ error: 'An error occurred' });
+	}
+};

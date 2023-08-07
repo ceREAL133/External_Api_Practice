@@ -28,6 +28,16 @@ export class LeadsService {
 			throw error;
 		}
 	}
+
+	async getSingleLead(leadId: string) {
+		try {
+			const lead = await this.axios.get(`/leads/single/${leadId}`);
+
+			return lead.data;
+		} catch (error) {
+			throw error;
+		}
+	}
 }
 
 export const leadsService = new LeadsService(instance);
