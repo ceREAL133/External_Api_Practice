@@ -1,11 +1,11 @@
 import { AxiosInstance } from 'axios';
-import { LeadCreationData, getLeadsData } from '../interfaces/interfaces';
+import { LeadCreationData, Lead } from '../interfaces/interfaces';
 import { instance } from '../instances/axios.instance';
 
 export class LeadsService {
 	constructor(private readonly axios: AxiosInstance) {}
 
-	async createNewLead(data: LeadCreationData) {
+	async createNewLead(data: LeadCreationData): Promise<Lead> {
 		try {
 			const newLead = await this.axios.post('/leads', data);
 			return newLead.data;
@@ -14,7 +14,7 @@ export class LeadsService {
 		}
 	}
 
-	async getLeads(fromDate: string, toDate: string) {
+	async getLeads(fromDate: string, toDate: string): Promise<Lead[]> {
 		try {
 			const leads = await this.axios.get('/leads', {
 				params: {
@@ -29,7 +29,7 @@ export class LeadsService {
 		}
 	}
 
-	async getSingleLead(leadId: string) {
+	async getSingleLead(leadId: string): Promise<Lead> {
 		try {
 			const lead = await this.axios.get(`/leads/single/${leadId}`);
 
